@@ -85,39 +85,39 @@ To use third-party TTS engines, click the gear icon in the demo and enter your A
 ## Architecture
 
 ```
-Browser (Client)                         Server (Next.js API Routes)
-─────────────────                        ──────────────────────────
+Browser (Client)                              Server (Next.js API Routes)
+─────────────────                             ──────────────────────────
 
   Chat Mode:
-  ┌───────────────┐     POST /api/chat     ┌──────────────────┐
-  │ useChat (AI)  ├──────────────────────►│ OpenAI streaming  │
-  │               │◄──────────────────────│ (sentence chunks) │
-  │ Sentence      │                        └──────────────────┘
-  │ Streamer      │
-  └───────┬───────┘
-          │ speak(sentence)
-          ▼
-  ┌───────────────┐  POST /api/visemes     ┌──────────────────┐
-  │useMascotSpeech├──────────────────────►│ Connection Pool   │
-  │  (queue)      │◄──────────────────────│ → api.mascot.bot  │
-  │               │  SSE (audio+visemes)   └──────────────────┘
-  └───────┬───────┘
-          ▼
+  ┌─────────────────┐                         ┌────────────────────┐
+  │ useChat (AI)    ├── POST /api/chat ──────►│ OpenAI streaming   │
+  │                 │◄───────────────────────-│ (sentence chunks)  │
+  │ Sentence        │                         └────────────────────┘
+  │ Streamer        │
+  └────────┬────────┘
+           │ speak(sentence)
+           ▼
+  ┌─────────────────┐                         ┌────────────────────┐
+  │ useMascotSpeech ├── POST /api/visemes ───►│ Connection Pool    │
+  │ (queue)         │◄── SSE (audio+visemes) ─│ → api.mascot.bot   │
+  │                 │                         └────────────────────┘
+  └────────┬────────┘
+           ▼
   MascotRive (lip-sync)
 
   Push-to-Talk:
-  ┌───────────────┐  POST /api/stt-token   ┌──────────────────┐
-  │usePushToTalk  ├──────────────────────►│ ElevenLabs token  │
-  │               │◄──────────────────────│ (single-use)      │
-  │ AudioContext  │                        └──────────────────┘
-  │ 16kHz PCM     │
-  │       │       │  WebSocket (PCM→text)
-  │       └───────┼──────────────────────► ElevenLabs
-  │               │◄──────────────────────  Scribe v2 Realtime
-  └───────┬───────┘
-          │ append(transcribed text)
-          ▼
-        useChat → normal chat flow
+  ┌─────────────────┐                         ┌────────────────────┐
+  │ usePushToTalk   ├── POST /api/stt-token ─►│ ElevenLabs token   │
+  │                 │◄───────────────────────-│ (single-use)       │
+  │ AudioContext    │                         └────────────────────┘
+  │ 16kHz PCM       │
+  │        │        │                         ┌────────────────────┐
+  │        └────────┼── WebSocket (PCM→text) ►│ ElevenLabs         │
+  │                 │◄───────────────────────-│ Scribe v2 Realtime │
+  └────────┬────────┘                         └────────────────────┘
+           │ append(transcribed text)
+           ▼
+         useChat → normal chat flow
 ```
 
 ```
