@@ -85,8 +85,8 @@ To use third-party TTS engines, click the gear icon in the demo and enter your A
 ## Architecture
 
 ```
-Browser (Client)                              Server (Next.js API Routes)
-─────────────────                             ──────────────────────────
+  Browser (Client)                              Server (Next.js API Routes)
+  ─────────────────                             ──────────────────────────
 
   Chat Mode:
   ┌─────────────────┐                         ┌────────────────────┐
