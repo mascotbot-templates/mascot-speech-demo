@@ -202,7 +202,7 @@ function VoiceOverControls({
     defaultVoice: "am_puck",
     enableNaturalLipSync: true,
     naturalLipSyncConfig: {
-      minVisemeInterval: 40,
+      minVisemeInterval: 20,
       mergeWindow: 60,
       keyVisemePreference: 0.6,
       preserveSilence: true,
