@@ -583,9 +583,7 @@ export default function MascotSpeechDemoPage() {
   >("mascotbot");
 
   // ElevenLabs settings
-  const [elevenLabsApiKey, setElevenLabsApiKey] = useState<string>(
-    process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || "",
-  );
+  const [elevenLabsApiKey, setElevenLabsApiKey] = useState<string>("");
   const [elevenLabsVoiceId, setElevenLabsVoiceId] =
     useState<string>("21m00Tcm4TlvDq8ikWAM");
   const [elevenLabsCustomVoiceId, setElevenLabsCustomVoiceId] =
