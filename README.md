@@ -1,6 +1,8 @@
 # Mascot Speech Demo
 > AI chat with animated avatars, push-to-talk, and real-time lip-sync
 
+![Mascot Speech Demo](docs/preview.png)
+
 ## What This Demonstrates
 - **`useMascotSpeech` hook** — queue-based text-to-speech with synchronized lip-sync animations
 - **AI Chat mode** — conversational chat powered by OpenAI, with sentence-by-sentence streaming to the speech queue
